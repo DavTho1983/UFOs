@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg">
+      <ul class=ufosightings>
+        <li *ngFor='let ufosighting of ufosightings | slice:start:end' (click)="onSelect(ufosighting)">
+          <div>
+            <h2>{{ufosighting.city | uppercase}} Details</h2>
+            <label>
+              City: {{ufosighting.city}}
+            </label>
+          </div>
+          <div><span>id: </span>{{ufosighting.id}}</div>
+        </li>
+      </ul>
+      <button disabledInc=[disabledInc] class="btn btn-default" (click)="onDecrement()" [class.disabled]="disabledDec">
+            <i class="fas fa-chevron-left fa-5x"></i>
+      </button>
+      <button class="btn btn-default" (click)="onIncrement()" [class.disabled]="disabledInc">
+            <i class="fas fa-chevron-right fa-5x"></i>
+      </button>
+    </div>
+    <div class="col-lg">
+        <div *ngIf="selectedSighting">
+          <h2>{{selectedSighting.city | uppercase}} Details</h2>
+            <div><span>id: </span>{{selectedSighting.id}}</div>
+            <div>
+              <label>city:
+                <input [(ngModel)]="selectedSighting.city" placeholder="city"/>
+              </label>
+            </div>
+        <div><span>odds of sighting: </span>{{selectedSighting.odds}}%</div>
+        <angular-d3-donut [id]="donutChartId" [data]=oddsData></angular-d3-donut>  
+        </div>
+    </div>
+</div>
